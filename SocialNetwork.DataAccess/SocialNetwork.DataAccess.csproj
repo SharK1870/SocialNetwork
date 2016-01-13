@@ -49,11 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IAuthorizationRepository.cs" />
-    <Compile Include="Abstract\IFriendRepository.cs" />
     <Compile Include="Abstract\IRepository.cs" />
-    <Compile Include="Abstract\IMessageRepository.cs" />
-    <Compile Include="Abstract\IProfileRepository.cs" />
     <Compile Include="Configurations\AuthorizationConfiguration.cs" />
     <Compile Include="Configurations\FriendConfiguration.cs" />
     <Compile Include="Configurations\MessageConfiguration.cs" />
@@ -65,11 +61,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AuthorizationRepository.cs" />
-    <Compile Include="Repositories\FriendRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Repositories\MessageRepository.cs" />
-    <Compile Include="Repositories\ProfileRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

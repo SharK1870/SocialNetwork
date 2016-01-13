@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using SocialNetwork.DataAccess.Abstract;
-using SocialNetwork.DataAccess.Context;
-using SocialNetwork.DataAccess.Repositories;
 using SocialNetwork.Domain.Models;
 
 namespace SocialNetwork.WebUI.Controllers
