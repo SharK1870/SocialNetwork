@@ -11,11 +11,7 @@ namespace SocialNetwork.WebUI.Controllers
     public class MessageController : Controller
     {
         private IRepository<MessageEntity> repository;
-        public MessageController()
-        {
-            this.repository = new Repository<MessageEntity>(new SocialNetworkContext());
-        }
-
+        
         public MessageController(IRepository<MessageEntity> repository)
         {
             this.repository = repository;

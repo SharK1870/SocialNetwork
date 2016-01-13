@@ -11,11 +11,7 @@ namespace SocialNetwork.WebUI.Controllers
     public class AuthorizationController : Controller
     {
         private IRepository<Authorization> authRepository;
-        public AuthorizationController()
-        {
-            this.authRepository = new Repository<Authorization>(new SocialNetworkContext());
-        }
-
+       
         public AuthorizationController(IRepository<Authorization> authRepository)
         {
             this.authRepository = authRepository;

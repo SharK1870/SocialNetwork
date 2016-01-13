@@ -11,11 +11,7 @@ namespace SocialNetwork.WebUI.Controllers
     public class ProfileController : Controller
     {
         private IRepository<Profile> repository;
-        public ProfileController()
-        {
-            this.repository = new Repository<Profile>(new SocialNetworkContext());
-        }
-
+        
         public ProfileController(IRepository<Profile> repository)
         {
             this.repository = repository;

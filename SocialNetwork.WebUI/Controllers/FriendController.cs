@@ -11,11 +11,7 @@ namespace SocialNetwork.WebUI.Controllers
     public class FriendController : Controller
     {
         private IRepository<FriendEntity> friendRepository;
-        public FriendController()
-        {
-            this.friendRepository = new Repository<FriendEntity>(new SocialNetworkContext());
-        }
-
+        
         public FriendController(IRepository<FriendEntity> friendRepository)
         {
             this.friendRepository = friendRepository;
