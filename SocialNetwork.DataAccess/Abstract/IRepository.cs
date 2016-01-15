@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.DataAccess.Abstract
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> : IDisposable
     {
-        IEnumerable<T> Get();
+        IQueryable<T> GetAllQuery();
+        ICollection<T> GetAll();
+        Task<ICollection<T>> GetAllAsync();
         T GetById(int id);
-        void Insert(T entity);
-        void Delete(int id);
+        T Add(T entity);
+        IEnumerable<T> AddRange(IEnumerable<T> entity);
+        void Delete(T entity);
+        void RemoveRange(IEnumerable<T> entity);
         void Update(T entity);
-        void Save();
-        void Dispose();
+        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

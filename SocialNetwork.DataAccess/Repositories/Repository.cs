@@ -4,6 +4,8 @@ using System.Linq;
 using SocialNetwork.Domain.Models;
 using SocialNetwork.DataAccess.Abstract;
 using SocialNetwork.DataAccess.Context;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace SocialNetwork.DataAccess.Repositories
 {
@@ -15,10 +17,18 @@ namespace SocialNetwork.DataAccess.Repositories
         {
             this.context = context;
         }
-
-        public IEnumerable<T> Get()
+        public IQueryable<T> GetAllQuery()
+        {
+            return context.Set<T>().AsQueryable();
+        }
+        public ICollection<T> GetAll()
         {
             return context.Set<T>().ToList();
+        }
+
+        public async Task<ICollection<T>> GetAllAsync()
+        {
+            return await context.Set<T>().ToListAsync();
         }
 
         public T GetById(int id)
@@ -26,28 +36,41 @@ namespace SocialNetwork.DataAccess.Repositories
             return context.Set<T>().Find(id);
         }
 
-        public void Insert(T entity)
+        public T Add(T entity)
         {
-            context.Set<T>().Add(entity);
+            return context.Set<T>().Add(entity);
         }
 
-        public void Delete(int id)
+        public IEnumerable<T> AddRange(IEnumerable<T> entities)
         {
-            T entity = context.Set<T>().Find(id);
-            if (entity != null)
-            {
-                context.Set<T>().Remove(entity);
-            }
+            return context.Set<T>().AddRange(entities);
+        }
+
+        public void Delete(T entity)
+        {
+            context.Set<T>().Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            context.Set<T>().RemoveRange(entities);
         }
 
         public void Update(T entity)
         {
-            context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            var entry = context.Entry(entity);
+            context.Set<T>().Attach(entity);
+            entry.State = EntityState.Modified;
         }
 
-        public void Save()
+        public int SaveChanges()
         {
-            context.SaveChanges();
+            return context.SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await context.SaveChangesAsync();
         }
 
         private bool disposed = false;
@@ -65,8 +88,11 @@ namespace SocialNetwork.DataAccess.Repositories
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            if (context != null)
+            {
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
         }
     }
 }

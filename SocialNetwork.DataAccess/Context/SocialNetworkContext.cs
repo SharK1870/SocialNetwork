@@ -7,7 +7,12 @@ namespace SocialNetwork.DataAccess.Context
     public class SocialNetworkContext : DbContext
     {
 
-        public SocialNetworkContext() : base("TestDB") { }
+        public SocialNetworkContext() : base("name=SocialNetwork") { }
+
+        static SocialNetworkContext()
+        {
+            Database.SetInitializer(new DbContextSeedInitializer());
+        }
 
         public DbSet<Authorization> Authorizations { get; set; }
         public DbSet<Profile> Profiles { get; set; }
@@ -20,6 +25,7 @@ namespace SocialNetwork.DataAccess.Context
             modelBuilder.Configurations.Add(new ProfileConfiguration());
             modelBuilder.Configurations.Add(new FriendConfiguration());
             modelBuilder.Configurations.Add(new MessageConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -54,12 +54,8 @@
     <Compile Include="Configurations\FriendConfiguration.cs" />
     <Compile Include="Configurations\MessageConfiguration.cs" />
     <Compile Include="Configurations\ProfileConfiguration.cs" />
+    <Compile Include="Context\DbContextSeedInitializer.cs" />
     <Compile Include="Context\SocialNetworkContext.cs" />
-    <Compile Include="Migrations\201601121141060_test.cs" />
-    <Compile Include="Migrations\201601121141060_test.Designer.cs">
-      <DependentUpon>201601121141060_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
@@ -72,11 +68,6 @@
       <Project>{92c58661-0ada-43ee-a58a-48faa95f2e59}</Project>
       <Name>SocialNetwork.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601121141060_test.resx">
-      <DependentUpon>201601121141060_test.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

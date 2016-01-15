@@ -17,7 +17,7 @@ namespace SocialNetwork.WebUI.Controllers
 
         public ViewResult Index()
         {
-            var messages = from p in repository.Get() select p;
+            var messages = from p in repository.GetAll() select p;
 
             return View(messages);
         }

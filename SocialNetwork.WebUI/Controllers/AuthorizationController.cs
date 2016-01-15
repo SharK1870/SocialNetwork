@@ -17,7 +17,7 @@ namespace SocialNetwork.WebUI.Controllers
 
         public ViewResult Index()
         {
-            var auth = from p in authRepository.Get() select p;
+            var auth = from p in authRepository.GetAll() select p;
             return View(auth);
         }
 

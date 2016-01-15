@@ -17,7 +17,7 @@ namespace SocialNetwork.WebUI.Controllers
 
         public ViewResult Index()
         {
-            var friends = from p in friendRepository.Get() select p;
+            var friends = from p in friendRepository.GetAll() select p;
 
             return View(friends);
         }
