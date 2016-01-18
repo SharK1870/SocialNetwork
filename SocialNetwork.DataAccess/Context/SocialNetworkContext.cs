@@ -7,12 +7,7 @@ namespace SocialNetwork.DataAccess.Context
     public class SocialNetworkContext : DbContext
     {
 
-        public SocialNetworkContext() : base("name=SocialNetwork") { }
-
-        static SocialNetworkContext()
-        {
-            Database.SetInitializer(new DbContextSeedInitializer());
-        }
+        public SocialNetworkContext() : base("SocialNetworkDB") { }
 
         public DbSet<Authorization> Authorizations { get; set; }
         public DbSet<Profile> Profiles { get; set; }

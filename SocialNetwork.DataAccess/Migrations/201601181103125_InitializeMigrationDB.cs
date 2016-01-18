@@ -3,7 +3,7 @@ namespace SocialNetwork.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class test : DbMigration
+    public partial class InitializeMigrationDB : DbMigration
     {
         public override void Up()
         {
@@ -41,6 +41,7 @@ namespace SocialNetwork.DataAccess.Migrations
                         UserId = c.Int(nullable: false),
                         FriendId = c.Int(nullable: false),
                         Id = c.Int(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => new { t.UserId, t.FriendId })
                 .ForeignKey("dbo.Profile", t => t.FriendId)
@@ -59,8 +60,8 @@ namespace SocialNetwork.DataAccess.Migrations
                         UserFromId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Profile", t => t.UserFromId, cascadeDelete: false)
-                .ForeignKey("dbo.Profile", t => t.UserToId, cascadeDelete: false)
+                .ForeignKey("dbo.Profile", t => t.UserFromId)
+                .ForeignKey("dbo.Profile", t => t.UserToId)
                 .Index(t => t.UserToId)
                 .Index(t => t.UserFromId);
             
