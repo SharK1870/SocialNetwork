@@ -4,6 +4,7 @@ using SocialNetwork.Domain.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 
 namespace SocialNetwork.BuisnessLayer.DataService
 {
@@ -26,6 +27,15 @@ namespace SocialNetwork.BuisnessLayer.DataService
         public async Task<IEnumerable<Profile>> GetAllProfiles()
         {
             return await _profileRepository.GetAllQuery().ToListAsync();
+        }
+
+        public async Task<int> GetCountFriends()
+        {
+            if (_friendRepository.GetAllQuery().Any())
+            {
+                return await _friendRepository.GetAllQuery().CountAsync();
+            }
+            return 0;
         }
     }
 }

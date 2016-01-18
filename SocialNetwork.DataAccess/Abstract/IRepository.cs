@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.DataAccess.Abstract
 {
     public interface IRepository<T> : IDisposable
     {
-        IQueryable<T> GetAllQuery();
-        ICollection<T> GetAll();
-        Task<ICollection<T>> GetAllAsync();
-        T GetById(int id);
+        IQueryable<T> GetAllQuery(); // Возвращает запрос на получение полного списка элементов
+        ICollection<T> GetAll(); // Возвращает коллекцию элементов
+        Task<ICollection<T>> GetAllAsync(); // Возвращает коллекцию элементов асинхронно
+        T Find(Expression<Func<T, bool>> match); // Поиск единственного элемента по условию
+        Task<T> FindAsync(Expression<Func<T, bool>> match); // Поиск единственного элемента по условию (Асинхронно)
+        bool Contains(Expression<Func<T, bool>> predicate); // Проверка наличия элемента в коллекции по условию       
+        Task<T> FindByKeyAsync(params object[] keys); // Поиск элемента по идентификатору Асинхронно
+        T FindByKey(params object[] keys); // Поиск элемента по идентификатору
         T Add(T entity);
         IEnumerable<T> AddRange(IEnumerable<T> entity);
         void Delete(T entity);

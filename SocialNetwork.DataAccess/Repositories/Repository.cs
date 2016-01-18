@@ -6,6 +6,7 @@ using SocialNetwork.DataAccess.Abstract;
 using SocialNetwork.DataAccess.Context;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Linq.Expressions;
 
 namespace SocialNetwork.DataAccess.Repositories
 {
@@ -31,9 +32,29 @@ namespace SocialNetwork.DataAccess.Repositories
             return await context.Set<T>().ToListAsync();
         }
 
-        public T GetById(int id)
+        public T Find(Expression<Func<T, bool>> match)
         {
-            return context.Set<T>().Find(id);
+            return context.Set<T>().SingleOrDefault(match);
+        }
+
+        public async Task<T> FindAsync(Expression<Func<T, bool>> match)
+        {
+            return await context.Set<T>().SingleOrDefaultAsync(match);
+        }
+
+        public T FindByKey(params object[] keys)
+        {
+            return context.Set<T>().Find(keys);
+        }
+
+        public async Task<T> FindByKeyAsync(params object[] keys)
+        {
+            return await context.Set<T>().FindAsync(keys);
+        }
+
+        public bool Contains(Expression<Func<T, bool>> predicate)
+        {
+            return context.Set<T>().Count(predicate) > 0;
         }
 
         public T Add(T entity)
@@ -71,26 +92,13 @@ namespace SocialNetwork.DataAccess.Repositories
         public async Task<int> SaveChangesAsync()
         {
             return await context.SaveChangesAsync();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-        }
+        }        
 
         public void Dispose()
         {
             if (context != null)
             {
-                Dispose(true);
+                context.Dispose();
                 GC.SuppressFinalize(this);
             }
         }

@@ -7,5 +7,7 @@ namespace SocialNetwork.BuisnessLayer.Abstract
     public interface IProfileDataService
     {
         Task<IEnumerable<Profile>> GetAllProfiles();
+
+        Task<int> GetCountFriends();        
     }
 }
