@@ -11,6 +11,7 @@ namespace SocialNetwork.DataAccess.Abstract
         IQueryable<T> GetAllQuery(); // Возвращает запрос на получение полного списка элементов
         ICollection<T> GetAll(); // Возвращает коллекцию элементов
         Task<ICollection<T>> GetAllAsync(); // Возвращает коллекцию элементов асинхронно
+        IQueryable<T> Filter(Expression<Func<T, bool>> predicate); // Метод получения запроса элементов по условию
         T Find(Expression<Func<T, bool>> match); // Поиск единственного элемента по условию
         Task<T> FindAsync(Expression<Func<T, bool>> match); // Поиск единственного элемента по условию (Асинхронно)
         bool Contains(Expression<Func<T, bool>> predicate); // Проверка наличия элемента в коллекции по условию       

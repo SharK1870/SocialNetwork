@@ -32,6 +32,11 @@ namespace SocialNetwork.DataAccess.Repositories
             return await context.Set<T>().ToListAsync();
         }
 
+        public IQueryable<T> Filter(Expression<Func<T, bool>> predicate)
+        {
+            return context.Set<T>().Where(predicate).AsQueryable();
+        }
+
         public T Find(Expression<Func<T, bool>> match)
         {
             return context.Set<T>().SingleOrDefault(match);
