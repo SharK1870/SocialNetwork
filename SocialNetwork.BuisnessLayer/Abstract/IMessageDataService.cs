@@ -4,8 +4,8 @@ using SocialNetwork.Domain.Models;
 
 namespace SocialNetwork.BuisnessLayer.Abstract
 {
-    public interface IProfileDataService
+    public interface IMessageDataService
     {
-        Task<IEnumerable<Profile>> GetAllProfiles();
+        Task<IEnumerable<MessageEntity>> GetAllMessages();
     }
 }

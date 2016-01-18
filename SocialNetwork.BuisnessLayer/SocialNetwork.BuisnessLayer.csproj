@@ -49,7 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IFriendDataService.cs" />
+    <Compile Include="Abstract\IMessageDataService.cs" />
     <Compile Include="Abstract\IProfileDataService.cs" />
+    <Compile Include="DataService\FriendDataService.cs" />
+    <Compile Include="DataService\MessageDataService.cs" />
     <Compile Include="DataService\ProfileDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
