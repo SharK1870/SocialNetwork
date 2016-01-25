@@ -5,6 +5,8 @@ using Ninject;
 using SocialNetwork.Domain.Models;
 using SocialNetwork.DataAccess.Abstract;
 using SocialNetwork.DataAccess.Repositories;
+using SocialNetwork.BuisnessLayer.Abstract;
+using SocialNetwork.BuisnessLayer.DataService;
 
 namespace SocialNetwork.WebUI.Infractructure
 {
@@ -32,6 +34,10 @@ namespace SocialNetwork.WebUI.Infractructure
             kernel.Bind<IRepository<Profile>>().To<Repository<Profile>>();
             kernel.Bind<IRepository<FriendEntity>>().To<Repository<FriendEntity>>();
             kernel.Bind<IRepository<MessageEntity>>().To<Repository<MessageEntity>>();
+            kernel.Bind<IAuthDataService>().To<AuthDataService>();
+            kernel.Bind<IProfileDataService>().To<ProfileDataService>();
+            kernel.Bind<IMessageDataService>().To<MessageDataService>();
+            kernel.Bind<IFriendDataService>().To<FriendDataService>();
         }
     }
 }

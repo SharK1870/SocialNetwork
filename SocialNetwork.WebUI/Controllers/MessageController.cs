@@ -1,31 +1,21 @@
-﻿using System.Data;
-using System.Linq;
-using System.Web.Mvc;
-using SocialNetwork.DataAccess.Abstract;
-using SocialNetwork.Domain.Models;
+﻿using System.Web.Mvc;
+using SocialNetwork.BuisnessLayer.Abstract;
 
 namespace SocialNetwork.WebUI.Controllers
 {
     public class MessageController : Controller
     {
-        private IRepository<MessageEntity> repository;
+        private readonly IMessageDataService _messageDataService;
         
-        public MessageController(IRepository<MessageEntity> repository)
+        public MessageController(IMessageDataService messageDataService)
         {
-            this.repository = repository;
+            _messageDataService=messageDataService;
         }
 
         public ViewResult Index()
         {
-            var messages = from p in repository.GetAll() select p;
-
+            var messages =_messageDataService.GetAllMessages();
             return View(messages);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            repository.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

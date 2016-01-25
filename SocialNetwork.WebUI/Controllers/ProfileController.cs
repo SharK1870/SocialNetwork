@@ -1,30 +1,21 @@
-﻿using System.Data;
-using System.Linq;
-using System.Web.Mvc;
-using SocialNetwork.DataAccess.Abstract;
-using SocialNetwork.Domain.Models;
+﻿using System.Web.Mvc;
+using SocialNetwork.BuisnessLayer.Abstract;
 
 namespace SocialNetwork.WebUI.Controllers
 {
     public class ProfileController : Controller
     {
-        private IRepository<Profile> repository;
-        
-        public ProfileController(IRepository<Profile> repository)
+        private readonly IProfileDataService _profileDataService;
+       
+        public ProfileController(IProfileDataService profileDataService)
         {
-            this.repository = repository;
+            _profileDataService = profileDataService;
         }
 
         public ViewResult Index()
         {
-            var profiles = from p in repository.GetAll() select p;
-            return View(profiles);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            repository.Dispose();
-            base.Dispose(disposing);
+            var user = _profileDataService.GetProfiles();
+            return View(user);                     
         }
     }
 }

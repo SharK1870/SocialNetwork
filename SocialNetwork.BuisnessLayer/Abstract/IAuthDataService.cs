@@ -3,8 +3,8 @@ using SocialNetwork.Domain.Models;
 
 namespace SocialNetwork.BuisnessLayer.Abstract
 {
-    public interface IMessageDataService
+    public interface IAuthDataService
     {
-        IEnumerable<MessageEntity> GetAllMessages();
+        IEnumerable<Authorization> GetAuthorizations();
     }
 }

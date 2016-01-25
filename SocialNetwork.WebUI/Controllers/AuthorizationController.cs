@@ -1,30 +1,21 @@
-﻿using System.Data;
-using System.Linq;
-using System.Web.Mvc;
-using SocialNetwork.DataAccess.Abstract;
-using SocialNetwork.Domain.Models;
+﻿using System.Web.Mvc;
+using SocialNetwork.BuisnessLayer.Abstract;
 
 namespace SocialNetwork.WebUI.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private IRepository<Authorization> authRepository;
-       
-        public AuthorizationController(IRepository<Authorization> authRepository)
+        private readonly IAuthDataService _authDataService;
+
+        public AuthorizationController(IAuthDataService authDataService)
         {
-            this.authRepository = authRepository;
+            _authDataService = authDataService;
         }
 
         public ViewResult Index()
         {
-            var auth = from p in authRepository.GetAll() select p;
+            var auth = _authDataService.GetAuthorizations();
             return View(auth);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            authRepository.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

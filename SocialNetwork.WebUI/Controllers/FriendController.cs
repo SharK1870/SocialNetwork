@@ -1,31 +1,21 @@
-﻿using System.Data;
-using System.Linq;
-using System.Web.Mvc;
-using SocialNetwork.DataAccess.Abstract;
-using SocialNetwork.Domain.Models;
+﻿using System.Web.Mvc;
+using SocialNetwork.BuisnessLayer.Abstract;
 
 namespace SocialNetwork.WebUI.Controllers
 {
     public class FriendController : Controller
     {
-        private IRepository<FriendEntity> friendRepository;
-        
-        public FriendController(IRepository<FriendEntity> friendRepository)
+        private readonly IFriendDataService _friendDataService;
+
+        public FriendController(IFriendDataService friendDataService)
         {
-            this.friendRepository = friendRepository;
+            _friendDataService = friendDataService;
         }
 
         public ViewResult Index()
         {
-            var friends = from p in friendRepository.GetAll() select p;
-
+            var friends = _friendDataService.GetAllFriends();
             return View(friends);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            friendRepository.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

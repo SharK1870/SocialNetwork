@@ -1,9 +1,8 @@
 ﻿using SocialNetwork.BuisnessLayer.Abstract;
 using SocialNetwork.DataAccess.Abstract;
 using SocialNetwork.Domain.Models;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Data.Entity;
+using System.Linq;
 
 namespace SocialNetwork.BuisnessLayer.DataService
 {
@@ -22,9 +21,9 @@ namespace SocialNetwork.BuisnessLayer.DataService
             _messageRepository = messageRepository;
         }
 
-        public async Task<IEnumerable<MessageEntity>> GetAllMessages()
+        public IEnumerable<MessageEntity> GetAllMessages()
         {
-            return await _messageRepository.GetAllQuery().ToListAsync();
+            return _messageRepository.GetAllQuery().ToList();
         }
     }
 }
